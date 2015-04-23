@@ -1,0 +1,28 @@
+-------------------------------
+ Noordin Top Terrorist Network
+-------------------------------
+
+This is the 4-layer multiplex networks of terrorist relationships
+mentioned in:
+
+  N. Roberts, S. F. Everton, Roberts and Everton "Terrorist
+  Data: Noordin Top Terrorist Network" (Subset) (2011).
+
+The four layers represent, respectively, communications, financial, 
+operation and trust relatioships among a group of 78 terrorists.  
+
+You can test multired on this data set by using, e.g., :
+
+ python simple_test.py file_list
+
+
+
+If you use this data set in a research work, please cite that paper. 
+Please also consider that an exhaustive multi-layer analysis of this 
+network has been performed in:
+
+ F. Battiston, V. Nicosia, V. Latora, 
+ "Structural measures for multiplex networks",
+  Phys. Rev. E 89, 032804 (2014).
+
+
