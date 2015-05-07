@@ -23,8 +23,9 @@ This is multired-0.1.
 
 
 This is a Python implementation of the algorithm for structural
-reduction of multi-layer networks based on the Von Neumann and on the
-Quantum Jensen-Shannon divergence of graphs, as explained in:
+reduction of multi-layer networks based on the Von Neumann Entropy 
+and on the Quantum Jensen-Shannon divergence of graphs, as explained 
+in:
 
   M. De Domenico. V. Nicosia, A. Arenas, V. Latora
   "Structural reducibility of multilayer networks", 
