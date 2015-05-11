@@ -126,7 +126,8 @@ class layer:
             #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
             #D = np.diag(np.diag(K))
             K = self.adj_matr.sum(0)
-            D = K * eye(self.N)
+            D = csr_matrix((self.N, self.N))
+            D.setdiag(eye(self.N) * K.transpose())
             self.laplacian = csr_matrix(D - self.adj_matr)
             K = self.laplacian.diagonal().sum()
             self.resc_laplacian = csr_matrix(self.laplacian / K)
@@ -140,12 +141,13 @@ class layer:
         #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
         #D = np.diag(np.diag(K))
         K = self.adj_matr.sum(0)
-        D = K * eye(self.N)
+        D = csr_matrix((self.N, self.N))
+        D.setdiag(eye(self.N) * K.transpose())
         self.laplacian = csr_matrix(D - self.adj_matr)
         K = self.laplacian.diagonal().sum()
         self.resc_laplacian = csr_matrix(self.laplacian / K)
         self._matrix_called = True
-    
+
     def dump_info(self):
         N, M = self.adj_matr.shape
         K = self.adj_matr.nnz
@@ -178,13 +180,15 @@ class layer:
         #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
         #D = np.diag(np.diag(K))
         K = self.adj_matr.sum(0)
-        D = K * eye(self.N)
+        D = csr_matrix((self.N, self.N))
+        D.setdiag(eye(self.N) * K. transpose())
         self.laplacian = csr_matrix(D - self.adj_matr)
         K = self.laplacian.diagonal().sum()
         self.resc_laplacian = csr_matrix(self.laplacian / K)
         self._matrix_called = True
 
-        
+    def dump_laplacian(self):
+        print self.laplacian
 
 class multiplex_red:
     
