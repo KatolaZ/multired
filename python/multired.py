@@ -35,7 +35,7 @@
 # --------------------------------------------
 #  
 #  -- 2015/04/23 -- release 0.1 
-# 
+#  -- 2015/05/11 -- release 0.1.1 -- removed the last full matrices 
 # 
 
 
@@ -123,8 +123,10 @@ class layer:
         elif matrix != None:
             self.adj_matr = copy.copy(matrix)
             self.N, _x = matrix.shape 
-            K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
-            D = np.diag(np.diag(K))
+            #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
+            #D = np.diag(np.diag(K))
+            K = self.adj_matr.sum(0)
+            D = K * eye(self.N)
             self.laplacian = csr_matrix(D - self.adj_matr)
             K = self.laplacian.diagonal().sum()
             self.resc_laplacian = csr_matrix(self.laplacian / K)
@@ -135,8 +137,10 @@ class layer:
         self.N = N 
         self.adj_matr = csr_matrix((self._ww, (self._ii, self._jj)), shape=(self.N, self.N))
         self.adj_matr = self.adj_matr + self.adj_matr.transpose()
-        K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
-        D = np.diag(np.diag(K))
+        #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
+        #D = np.diag(np.diag(K))
+        K = self.adj_matr.sum(0)
+        D = K * eye(self.N)
         self.laplacian = csr_matrix(D - self.adj_matr)
         K = self.laplacian.diagonal().sum()
         self.resc_laplacian = csr_matrix(self.laplacian / K)
@@ -171,8 +175,10 @@ class layer:
             self.adj_matr = self.adj_matr + other_layer.adj_matr
         else:
             self.adj_matr = copy.copy(other_layer.adj_matr)
-        K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
-        D = np.diag(np.diag(K))
+        #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
+        #D = np.diag(np.diag(K))
+        K = self.adj_matr.sum(0)
+        D = K * eye(self.N)
         self.laplacian = csr_matrix(D - self.adj_matr)
         K = self.laplacian.diagonal().sum()
         self.resc_laplacian = csr_matrix(self.laplacian / K)
