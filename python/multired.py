@@ -123,13 +123,8 @@ class layer:
         elif matrix != None:
             self.adj_matr = copy.copy(matrix)
             self.N, _x = matrix.shape 
-            #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
-            #D = np.diag(np.diag(K))
             K = self.adj_matr.sum(0).reshape((1, self.N)).tolist()[0]
             D = csr_matrix((K, (range(self.N), range(self.N)) ), shape=(self.N, self.N))
-            #K = self.adj_matr.sum(0)
-            #D = csr_matrix((self.N, self.N))
-            #D.setdiag(eye(self.N) * K.transpose())
             self.laplacian = csr_matrix(D - self.adj_matr)
             K = self.laplacian.diagonal().sum()
             self.resc_laplacian = csr_matrix(self.laplacian / K)
@@ -140,11 +135,8 @@ class layer:
         self.N = N 
         self.adj_matr = csr_matrix((self._ww, (self._ii, self._jj)), shape=(self.N, self.N))
         self.adj_matr = self.adj_matr + self.adj_matr.transpose()
-        #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
-        #D = np.diag(np.diag(K))
         K = self.adj_matr.sum(0).reshape((1, self.N)).tolist()[0]
         D = csr_matrix((K, (range(self.N), range(self.N)) ), shape=(self.N, self.N))
-        #D.setdiag(eye(self.N) * K.transpose())
         self.laplacian = csr_matrix(D - self.adj_matr)
         K = self.laplacian.diagonal().sum()
         self.resc_laplacian = csr_matrix(self.laplacian / K)
@@ -179,13 +171,8 @@ class layer:
             self.adj_matr = self.adj_matr + other_layer.adj_matr
         else:
             self.adj_matr = copy.copy(other_layer.adj_matr)
-        #K = np.multiply(self.adj_matr.sum(0), np.ones((self.N,self.N)))
-        #D = np.diag(np.diag(K))
         K = self.adj_matr.sum(0).reshape((1, self.N)).tolist()[0]
         D = csr_matrix((K, (range(self.N), range(self.N)) ), shape=(self.N, self.N))
-        #K = self.adj_matr.sum(0)
-        #D = csr_matrix((self.N, self.N))
-        #D.setdiag(eye(self.N) * K. transpose())
         self.laplacian = csr_matrix(D - self.adj_matr)
         K = self.laplacian.diagonal().sum()
         self.resc_laplacian = csr_matrix(self.laplacian / K)
