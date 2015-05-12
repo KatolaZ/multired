@@ -160,7 +160,7 @@ class layer:
     def compute_VN_entropy_approx(self, poly):
         p = poly.degree
         h = - poly[p] * self.N
-        M = csr_matrix(np.eye(self.N))
+        M = csr_matrix(eye(self.N))
         for i in range(p-1, -1, -1):
             M = M *  self.resc_laplacian
             h += - poly[i] * sum(M.diagonal())
