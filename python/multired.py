@@ -103,10 +103,10 @@ class layer:
                         d = int(elems[1])
                         self._ii.append(s)
                         self._jj.append(d)
-                        if s > self.N:
-                            self.N = s
-                        if d > self.N:
-                            self.N = d
+                        #if s > self.N:
+                        #    self.N = s
+                        #if d > self.N:
+                        #    self.N = d
                         if s < min_N:
                             min_N = s
                         if  d < min_N:
@@ -116,7 +116,13 @@ class layer:
                             self._ww.append(float(val))
                         else:
                             self._ww.append(int(1))
-                    
+                m1 = max(self._ii)
+                m2 = max(self._jj)
+                if m1 > m2:
+                    self.N = m1
+                else:
+                    self.N = m2
+                
             except (IOError):
                 print "Unable to find/open file %s -- Exiting!!!" % layerfile
                 exit(-2)
@@ -207,15 +213,17 @@ class multiplex_red:
                     if (self.verb):
                         sys.stderr.write("Loading layer %d from file %s" % (len(self.layers), l))
                     A = layer(l.strip(" \n"))
-                    if A.N > self.N:
-                        self.N = A.N+1
+                    #if A.N > self.N:
+                    #    self.N = A.N+1
                     self.layers.append(A)
-                    n = 0
-                    for l in self.layers:
-                        l.make_matrices(self.N)
-                        l.num_layer = n
-                        n += 1
-                    self.M = len(self.layers)
+            n = 0
+            N = max([x.N for x in self.layers])
+            self.N = N + 1
+            for l in self.layers:
+                l.make_matrices(self.N)
+                l.num_layer = n
+                n += 1
+            self.M = len(self.layers)
         except ( IOError):
             print "Unable to find/open file %s -- Exiting!!!" % layer_file
             exit(-2)
